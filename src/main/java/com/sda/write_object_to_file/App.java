@@ -10,6 +10,14 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
 
+        Config configuration = new Config();
+
+        WeatherService weatherService = new WeatherService(configuration.loadProperties().getUrl(), configuration.loadProperties().getKey());
+
+                /*"http://api.apixu.com/v1/current.json",
+                "336d39b18670470196780108180709"*/
+        weatherService.getCityWeather("paris");
+
         List<Weather> weathers = new ArrayList<>();
 
         weathers.add(new Weather("Poznan", "www", 24.00, 25.00, "cloudy", 34.35, 12.56));
@@ -32,19 +40,20 @@ public class App {
         File filename = new File("weather.json");
         try {
             objectMapper.writeValue(filename, weathers);
-           // objectMapper.writeValue(filename, weather);
+            // objectMapper.writeValue(filename, weather);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         try {
-            Weather[] readWeather = objectMapper.readValue(filename,Weather[].class);
+            Weather[] readWeather = objectMapper.readValue(filename, Weather[].class);
 
-            for (Weather w : readWeather){
+            for (Weather w : readWeather) {
                 System.out.println(w.getCity());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Config.saveConfiguration();
     }
 }

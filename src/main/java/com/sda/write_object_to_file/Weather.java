@@ -13,6 +13,19 @@ public class Weather {
     public Weather() {
     }
 
+    @Override
+    public String toString() {
+        return "Weather {" +
+                "city='" + city + '\'' +
+                ", iconUrl='" + iconUrl + '\'' +
+                ", temperature=" + temperature +
+                ", feelsLikeC=" + feelsLikeC +
+                ", conditionText='" + conditionText + '\'' +
+                ", lat=" + lat +
+                ", lon=" + lon +
+                '}';
+    }
+
     public Weather(String city, String iconUrl, double temperature, double feelsLikeC, String conditionText, double lat, double lon) {
         this.city = city;
         this.iconUrl = iconUrl;
